@@ -613,14 +613,15 @@ class Client extends EventEmitter {
                 return msg.serialize();
             }, chatId, content, internalOptions, sendSeen);
         } catch (e) {
-            console.log("client whatsapp-web-js client.js 614 ");
+            console.log("FIX ERROR client whatsapp-web-js client.js 614 ");
         }
 
         // FIX ERROR
         try {
             return new Message(this, newMessage);
         } catch (e) {
-            console.log("client whatsapp-web-js client.js 618 ");
+            console.log("FIX ERROR client whatsapp-web-js client.js 618 ");
+            return ;
         }
 
 

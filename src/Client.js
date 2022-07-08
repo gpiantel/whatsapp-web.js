@@ -596,20 +596,34 @@ class Client extends EventEmitter {
             );
         }
 
-        const newMessage = await this.pupPage.evaluate(async (chatId, message, options, sendSeen) => {
-            const chatWid = window.Store.WidFactory.createWid(chatId);
-            const chat = await window.Store.Chat.find(chatWid);
+
+        // FIX ERROR
+        try {
+
+            const newMessage = await this.pupPage.evaluate(async (chatId, message, options, sendSeen) => {
+                const chatWid = window.Store.WidFactory.createWid(chatId);
+                const chat = await window.Store.Chat.find(chatWid);
 
 
-            if (sendSeen) {
-                window.WWebJS.sendSeen(chatId);
-            }
+                if (sendSeen) {
+                    window.WWebJS.sendSeen(chatId);
+                }
 
-            const msg = await window.WWebJS.sendMessage(chat, message, options, sendSeen);
-            return msg.serialize();
-        }, chatId, content, internalOptions, sendSeen);
+                const msg = await window.WWebJS.sendMessage(chat, message, options, sendSeen);
+                return msg.serialize();
+            }, chatId, content, internalOptions, sendSeen);
+        } catch (e) {
+            console.log("client whatsapp-web-js client.js 614 ");
+        }
 
-        return new Message(this, newMessage);
+        // FIX ERROR
+        try {
+            return new Message(this, newMessage);
+        } catch (e) {
+            console.log("client whatsapp-web-js client.js 618 ");
+        }
+
+
     }
 
     /**

@@ -264,7 +264,18 @@ class Client extends EventEmitter {
 
         }
 
-        await page.evaluate(ExposeStore, moduleRaid.toString());
+        var errore = false;
+        var quante_volte = 0 ;
+        do {
+            try{
+                await page.evaluate(ExposeStore, moduleRaid.toString());
+            }catch(error){
+                console.log("error 271 ", error);
+                errore = true;
+                quante_volte++;
+            }
+        } while (errore && quante_volte<5);
+        
         const authEventPayload = await this.authStrategy.getAuthEventPayload();
 
         /**

@@ -268,7 +268,7 @@ class Client extends EventEmitter {
         var quante_volte = 0 ;
         do {
             try{
-                await page.evaluate(ExposeStore, moduleRaid.toString());
+                // await page.evaluate(ExposeStore, moduleRaid.toString());
             }catch(error){
                 console.log("error 271 ", error);
                 errore = true;
